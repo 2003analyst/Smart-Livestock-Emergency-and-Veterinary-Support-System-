@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - SmartLivestock</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/session.js"></script>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="logo-icon">🐄</span>
+                <span class="logo-text">SmartLivestock</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active" data-section="dashboard">
+                    <span class="nav-icon">📊</span> Dashboard
+                </a>
+                <a href="#" data-section="emergencies">
+                    <span class="nav-icon">🚨</span> Emergency Cases
+                </a>
+                <a href="#" data-section="chat">
+                    <span class="nav-icon">💬</span> Chat
+                </a>
+                <a href="#" data-section="appointments">
+                    <span class="nav-icon">📅</span> Appointments
+                </a>
+              <a href="javascript:void(0)" onclick="logout()">
+            <span class="nav-icon">🚪</span>
+            Logout
+            </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard -->
+            <section id="section-dashboard" class="section active">
+                <div class="section-header">
+                    <h1>👋Welcome, <span id="doctorName">Doctor</span></h1>
+                    <p>Manage emergency cases and appointments</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🚨</div>
+                        <div>
+                            <h3>Pending Emergencies</h3>
+                            <p id="pendingEmergencies">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div>
+                            <h3>Resolved Cases</h3>
+                            <p id="resolvedCases">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div>
+                            <h3>Today's Appointments</h3>
+                            <p id="todayAppointments">0</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section active" id="section-emergencies">
+
+         <div class="section-header">
+         <h1>🚨 Emergency Cases</h1>
+
+        <button
+            class="btn btn-primary"
+            onclick="loadDoctorEmergencies()"
+        >
+            Refresh
+        </button>
+        </div>
+
+         <div
+        id="doctorEmergencyList"
+        class="livestock-grid"
+      >
+        <p>Loading emergencies...</p>
+        </div>
+
+        </section>
+
+            
+
+            <!-- Chat -->
+            <section id="section-chat" class="section">
+                <div class="section-header">
+                    <h1>💬 Chat with Farmers</h1>
+                </div>
+                <div class="chat-container">
+                    <div id="chatMessages" class="chat-box">
+                        <!-- Messages loaded by JavaScript -->
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Type your message...">
+                        <button onclick="sendDoctorMessage()" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appointments -->
+            <section id="section-appointments" class="section">
+                <div class="section-header">
+                    <h1>📅 Appointments</h1>
+                </div>
+                <div id="doctorAppointmentsList">
+                    <!-- Loaded by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <h2 id="welcomeText"></h2>
+
+    <script src="js/api.js"></script>
+     <script src="js/doctor-dashboard.js"></script>
+</body>
+</html>

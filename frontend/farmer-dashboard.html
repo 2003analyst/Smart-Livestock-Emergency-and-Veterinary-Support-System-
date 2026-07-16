@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard - SmartLivestock</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/session.js"></script>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="logo-icon">🐄</span>
+                <span class="logo-text">SmartLivestock</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active" data-section="dashboard">
+                    <span class="nav-icon">📊</span> Dashboard
+                </a>
+                <a href="#" data-section="livestock">
+                    <span class="nav-icon">🐄</span> My Livestock
+                </a>
+                <a href="#" data-section="add-livestock">
+                    <span class="nav-icon">➕</span> Add Livestock
+                </a>
+                <a href="#" data-section="emergency">
+                    <span class="nav-icon">🚨</span> Report Emergency
+                </a>
+                <a href="#" data-section="emergencies-history">
+                    <span class="nav-icon">📋</span> Emergency History
+                </a>
+                <a href="#" data-section="chat">
+                    <span class="nav-icon">💬</span> Chat
+                </a>
+                <a href="#" data-section="appointments">
+                    <span class="nav-icon">📅</span> Appointments
+                </a>
+               <a href="javascript:void(0)" onclick="logout()">
+             <span class="nav-icon">🚪</span>
+             Logout
+            </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="section-dashboard" class="section active">
+                <div class="section-header">
+                    <h1>👋 Welcome, <span id="farmerName">Farmer</span></h1>
+                    <p>Here's an overview of your livestock and activities</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🐄</div>
+                        <div>
+                            <h3>Total Livestock</h3>
+                            <p id="totalLivestock">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🚨</div>
+                        <div>
+                            <h3>Active Emergencies</h3>
+                            <p id="activeEmergencies">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div>
+                            <h3>Pending Appointments</h3>
+                            <p id="pendingAppointments">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div>
+                            <h3>Resolved Emergencies</h3>
+                            <p id="resolvedEmergencies">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recent-activity">
+                    <h3>Recent Activities</h3>
+                    <div id="recentActivities">
+                        <p style="color: #999;">No recent activities</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Livestock Section -->
+            <section id="section-livestock" class="section">
+                <div class="section-header">
+                    <h1>🐄 My Livestock</h1>
+                    <a href="#" onclick="showSection('add-livestock')" class="btn btn-primary">Add New</a>
+                </div>
+                <div id="livestockList" class="livestock-grid">
+                    <!-- Loaded by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Add Livestock Section -->
+            <section id="section-add-livestock" class="section">
+                <div class="section-header">
+                    <h1>➕ Register New Livestock</h1>
+                </div>
+                <form id="livestockForm" class="form-card">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Animal Type *</label>
+                            <select id="animalType" required>
+                                <option value="">Select type</option>
+                                <option value="cattle">Cattle</option>
+                                <option value="goat">Goat</option>
+                                <option value="sheep">Sheep</option>
+                                <option value="poultry">Poultry</option>
+                                <option value="pig">Pig</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Breed</label>
+                            <input type="text" id="breed" placeholder="e.g., Jersey">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name (Optional)</label>
+                            <input type="text" id="animalName" placeholder="Give your animal a name">
+                        </div>
+                        <div class="form-group">
+                            <label>Age (Years) *</label>
+                            <input type="number" id="age" min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Weight (kg)</label>
+                            <input type="number" id="weight" step="0.1" placeholder="Optional">
+                        </div>
+                        <div class="form-group">
+                            <label>Health Status</label>
+                            <select id="healthStatus">
+                                <option value="Healthy">Healthy</option>
+                                <option value="Sick">Sick</option>
+                                <option value="Under Treatment">Under Treatment</option>
+                                <option value="Recovering">Recovering</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Photo (Optional)</label>
+                        <input type="file" id="animalImage" accept="image/*">
+                    </div>
+                    <div id="livestockFormError" class="error-message" style="display:none;"></div>
+                    <button type="submit" class="btn btn-primary">Register Livestock</button>
+                </form>
+            </section>
+
+            <!-- Emergency Section -->
+            <section id="section-emergency" class="section">
+                <div class="section-header">
+                    <h1>🚨 Report Emergency</h1>
+                    <p>Describe the emergency in detail for quick response</p>
+                </div>
+                <form id="emergencyForm" class="form-card">
+                    <div class="form-group">
+                        <label>Select Affected Livestock *</label>
+                        <select id="emergencyLivestock" required>
+                            <option value="">Select an animal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Emergency Title *</label>
+                        <input type="text" id="emergencyTitle" placeholder="e.g., Severe fever and loss of appetite" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description of Symptoms *</label>
+                        <textarea id="emergencyDescription" rows="4" placeholder="Describe what's happening with the animal..." required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Severity Level *</label>
+                            <select id="severity" required>
+                                <option value="critical">🔴 Critical - Immediate danger</option>
+                                <option value="high">🟠 High - Needs urgent attention</option>
+                                <option value="medium">🟡 Medium - Needs attention soon</option>
+                                <option value="low">🟢 Low - Can wait</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="emergencyLocation" placeholder="Where is the animal located?">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Photo (Optional)</label>
+                        <input type="file" id="emergencyImage" accept="image/*">
+                    </div>
+                    <div id="emergencyFormError" class="error-message" style="display:none;"></div>
+                    <button type="submit" class="btn btn-danger">🚨 Report Emergency Now</button>
+                </form>
+            </section>
+
+            <!-- Emergency History Section -->
+            <section id="section-emergencies-history" class="section">
+                <div class="section-header">
+                    <h1>📋 Emergency History</h1>
+                </div>
+                <div id="emergencyHistoryList">
+                    <!-- Loaded by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Chat Section -->
+            <section id="section-chat" class="section">
+                <div class="section-header">
+                    <h1>💬 Chat with Vet</h1>
+                    <p>Communicate directly with veterinary doctors</p>
+                </div>
+                <div class="chat-container">
+                    <div id="chatMessages" class="chat-box">
+                        <!-- Messages loaded by JavaScript -->
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Type your message...">
+                        <button onclick="sendMessage()" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appointments Section -->
+          <section id="section-appointments" class="section">
+
+    <div class="section-header">
+        <h1>📅 My Appointments</h1>
+
+        <button
+            class="btn btn-primary"
+            onclick="showAppointmentForm()"
+        >
+            Book Appointment
+        </button>
+    </div>
+
+    <!-- Appointment form -->
+    <div
+        id="appointmentFormContainer"
+        class="auth-card"
+        style="display: none; margin-bottom: 25px;"
+    >
+
+        <h2>Book Appointment</h2>
+
+        <form id="appointmentForm" class="auth-form">
+
+            <div class="form-group">
+                <label for="appointmentLivestock">
+                    Select Livestock
+                </label>
+
+                <select id="appointmentLivestock" required>
+                    <option value="">
+                        Select an animal
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="appointmentDate">
+                    Appointment Date
+                </label>
+
+                <input
+                    type="date"
+                    id="appointmentDate"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="appointmentTime">
+                    Appointment Time
+                </label>
+
+                <input
+                    type="time"
+                    id="appointmentTime"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="appointmentPurpose">
+                    Purpose
+                </label>
+
+                <textarea
+                    id="appointmentPurpose"
+                    placeholder="Explain why you need the appointment"
+                    required
+                ></textarea>
+            </div>
+
+            <div
+                id="appointmentFormError"
+                class="error-message"
+                style="display: none;"
+            ></div>
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Submit Appointment
+            </button>
+
+            <button
+                type="button"
+                class="btn"
+                onclick="hideAppointmentForm()"
+            >
+                Cancel
+            </button>
+
+        </form>
+    </div>
+
+    <!-- Appointment list -->
+    <div id="appointmentsList">
+        <p>Loading appointments...</p>
+    </div>
+
+</section>
+        </main>
+    </div>
+
+    <h2 id="welcomeText"></h2>
+
+    <script src="js/api.js"></script>
+   <script src="js/farmer-dashboard.js"></script>
+</body>
+</html>

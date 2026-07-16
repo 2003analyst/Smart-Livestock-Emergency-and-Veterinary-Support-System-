@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SmartLivestock</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/session.js"></script>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="logo-icon">🐄</span>
+                <span class="logo-text">SmartLivestock</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active" data-section="dashboard">
+                    <span class="nav-icon">📊</span> Dashboard
+                </a>
+                <a href="#" data-section="users">
+                    <span class="nav-icon">👤</span> Manage Users
+                </a>
+                <a href="#" data-section="livestock">
+                    <span class="nav-icon">🐄</span> All Livestock
+                </a>
+                <a href="#" data-section="emergencies">
+                    <span class="nav-icon">🚨</span> All Emergencies
+                </a>
+                <a href="#" data-section="appointments">
+                    <span class="nav-icon">📅</span> All Appointments
+                </a>
+               <a href="javascript:void(0)" onclick="logout()">
+                <span class="nav-icon">🚪</span>
+                Logout
+                </a>
+
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard -->
+            <section id="section-dashboard" class="section active">
+                <div class="section-header">
+                    <h1>👋 Welcome, Administrator</h1>
+                    <p>System overview and statistics</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👤</div>
+                        <div>
+                            <h3>Total Users</h3>
+                            <p id="adminTotalUsers">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🐄</div>
+                        <div>
+                            <h3>Total Livestock</h3>
+                            <p id="adminTotalLivestock">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🚨</div>
+                        <div>
+                            <h3>Total Emergencies</h3>
+                            <p id="adminTotalEmergencies">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div>
+                            <h3>Total Appointments</h3>
+                            <p id="adminTotalAppointments">0</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users -->
+            <section id="section-users" class="section">
+                <div class="section-header">
+                    <h1>👤 Manage Users</h1>
+                </div>
+                <div id="adminUsersList">
+                    <!-- Loaded by JavaScript -->
+                </div>
+            </section>
+
+            <!-- All Livestock -->
+            <section id="section-livestock" class="section">
+                <div class="section-header">
+                    <h1>🐄 All Livestock</h1>
+                </div>
+                <div id="adminLivestockList">
+                    <!-- Loaded by JavaScript -->
+                </div>
+            </section>
+
+            <!-- All Emergencies -->
+            <section id="section-emergencies" class="section">
+                <div class="section-header">
+                    <h1>🚨 All Emergencies</h1>
+                </div>
+                <div id="adminEmergenciesList">
+                    <!-- Loaded by JavaScript -->
+                </div>
+            </section>
+
+            <!-- All Appointments -->
+            <section id="section-appointments" class="section">
+                <div class="section-header">
+                    <h1>📅 All Appointments</h1>
+                </div>
+                <div id="adminAppointmentsList">
+                    <!-- Loaded by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <h2 id="welcomeText"></h2>
+
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
