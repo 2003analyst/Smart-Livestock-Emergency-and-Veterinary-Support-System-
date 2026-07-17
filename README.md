@@ -74,9 +74,7 @@ The system provides a centralized platform where:
 - GitHub
 
 ### Deployment
-- Docker
 - GitHub Actions
-- Render / Railway
 
 ---
 
@@ -112,56 +110,6 @@ git clone https://github.com/2003analyst/Smart-Livestock-Emergency-and-Veterinar
 cd Smart-Livestock-Emergency-and-Veterinary-Support-System-
 ```
 
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### Backend
-
-```bash
-cd backend
-
-python -m venv venv
-
-source venv/bin/activate
-```
-
-Windows
-
-```bash
-venv\Scripts\activate
-```
-
-Install packages
-
-```bash
-pip install -r requirements.txt
-```
-
-Run server
-
-```bash
-python manage.py runserver
-```
-
----
-
-## Project Structure
-
-```
-Smart-Livestock/
-│
-├── frontend/
-├── backend/
-├── docs/
-├── README.md
-├── .gitignore
-└── docker-compose.yml
-```
 
 ---
 
@@ -177,8 +125,8 @@ Smart-Livestock/
 
 ## Authors
 
-- Your Name
-- Registration Number
+- Tatu Ameir Haji
+- 24BCS011
 - State University of Zanzibar (SUZA)
 
 ---
